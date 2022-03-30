@@ -30,7 +30,7 @@ const requests = {
 
 const Activites = {
     list: () => requests.get<Activity[]>('/activities'),
-    details: (id: string) => requests.get<Activity>(`/activities/{id}`),
+    details: (id: string) => requests.get<Activity>(`/activities/${id}`),
     create: (activity: Activity) => requests.post('/activities',activity),
     update: (activity: Activity) => requests.put(`/activities/${activity.id}`,activity),
     delete: (id: string) => requests.delete(`/activities/${id}`)
