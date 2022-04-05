@@ -9,7 +9,7 @@ interface Store{
 
 export const store: Store = {
     activityStore: new ActivityStore(),
-    commonStore: new CommonStore
+    commonStore: new CommonStore()
 }
 
 export const StoreContext = createContext(store);

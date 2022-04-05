@@ -19,8 +19,6 @@ axios.interceptors.response.use(async response => {
 
 }, (error: AxiosError) => {
     const { data, status, config } = error.response!;
-    
-console.log(data.errors);
 
     switch (status) {
         case 400:
@@ -68,7 +66,7 @@ const requests = {
     delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
-const Activites = {
+const Activities = {
     list: () => requests.get<Activity[]>('/activities'),
     details: (id: string) => requests.get<Activity>(`/activities/${id}`),
     create: (activity: Activity) => requests.post('/activities', activity),
@@ -77,7 +75,7 @@ const Activites = {
 }
 
 const agent = {
-    Activites
+    Activities
 }
 
 export default agent;
