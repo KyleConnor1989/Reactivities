@@ -10,9 +10,6 @@ interface Props {
 
 export default observer(function ActivityDetailedInfo({ activity }: Props) {
 
-    console.log(activity);
-    console.log(activity.date);
-
     return (
         <Segment.Group>
             <Segment attached='top'>

@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify';
 import { history } from '../..';
-import { Activity } from '../models/Activity';
+import { Activity, ActivityFormValues } from '../models/Activity';
 import { User, UserFormValues } from '../models/User';
 import { store } from '../stores/store';
 
@@ -70,15 +70,16 @@ const requests = {
     get: <T>(url: string) => axios.get<T>(url).then(responseBody),
     post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
     put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
-    delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
+    del: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 }
 
 const Activities = {
     list: () => requests.get<Activity[]>('/activities'),
     details: (id: string) => requests.get<Activity>(`/activities/${id}`),
-    create: (activity: Activity) => requests.post('/activities', activity),
-    update: (activity: Activity) => requests.put(`/activities/${activity.id}`, activity),
-    delete: (id: string) => requests.delete(`/activities/${id}`)
+    create: (activity: ActivityFormValues) => requests.post('/activities', activity),
+    update: (activity: ActivityFormValues) => requests.put(`/activities/${activity.id}`, activity),
+    delete: (id: string) => requests.del(`/activities/${id}`),
+    attent: (id:string) => requests.post<void>(`/activities/${id}/attend`,{})
 }
 
 const Account = {
