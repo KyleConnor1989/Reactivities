@@ -32,8 +32,8 @@ namespace Infrastructure.Security
                 .SingleOrDefault(x => x.Key == "id").Value?.ToString());
 
             var attendee = _dbContext.ActivityAttendees
-            .AsNoTracking()
-            .SingleOrDefaultAsync(x => x.AppUserId == userId && x.ActivityId == activityId).Result;
+                .AsNoTracking()
+                .SingleOrDefaultAsync(x => x.AppUserId == userId && x.ActivityId == activityId).Result;
 
             if(attendee == null) return Task.CompletedTask; 
 

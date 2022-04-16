@@ -19,7 +19,7 @@ export default observer(function RegisterForm() {
                     .catch(error => setErrors({ error }))}
             validationSchema={Yup.object({
                 displayName: Yup.string().required(),
-                username: Yup.string().required(),
+                username: Yup.string().required().matches(/^[a-zA-Z0-9_]+$/, 'Username must be alphanumeric with no special characters or spaces'),
                 email: Yup.string().required().email(),
                 password: Yup.string().required(),
             })}
