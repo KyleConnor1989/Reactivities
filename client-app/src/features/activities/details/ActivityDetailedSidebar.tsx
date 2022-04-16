@@ -30,7 +30,7 @@ export default observer(function ActivityDetailedSidebar({ activity: { attendees
                     {attendees.map(attendee => (
                         <Item style={{ position: 'relative' }} key={attendee.username}>
                             {
-                                attendee.username == host?.username &&
+                                attendee.username === host?.username &&
                                 <Label
                                     style={{ position: 'absolute' }}
                                     color='orange'
