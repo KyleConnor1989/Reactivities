@@ -2,6 +2,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { Activity, ActivityFormValues } from '../models/Activity';
+import { PaginatedResult } from '../models/Pagination';
 import { Photo, Profile } from '../models/Profile';
 import { User, UserFormValues } from '../models/User';
 import { store } from '../stores/store';
@@ -23,6 +24,12 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(async response => {
 
     await sleep(1000);
+    const pagination = response.headers['pagination'];
+
+    if(pagination){
+        response.data = new PaginatedResult(response.data, JSON.parse(pagination));
+        return response as AxiosResponse<PaginatedResult<any>>
+    }
     return response;
 
 }, (error: AxiosError) => {
@@ -75,7 +82,8 @@ const requests = {
 }
 
 const Activities = {
-    list: () => requests.get<Activity[]>('/activities'),
+    list: (params: URLSearchParams) => axios.get<PaginatedResult<Activity[]>>('/activities',{params})
+        .then(responseBody),
     details: (id: string) => requests.get<Activity>(`/activities/${id}`),
     create: (activity: ActivityFormValues) => requests.post('/activities', activity),
     update: (activity: ActivityFormValues) => requests.put(`/activities/${activity.id}`, activity),

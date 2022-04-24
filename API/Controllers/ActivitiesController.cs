@@ -9,9 +9,9 @@ namespace API.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<List<Activity>>> GetActivitites()
+        public async Task<ActionResult> GetActivitites([FromQuery] ActivityParams param)
         {
-            return HandleResult(await Mediator.Send(new List.Query()));
+            return HandlePagedResult(await Mediator.Send(new Lists.Query{Params = param}));
         }
 
         [HttpGet("{id}")]
