@@ -17,23 +17,28 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
-           var host = CreateHostBuilder(args).Build();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-           using var scope = host.Services.CreateScope();
+            var host = CreateHostBuilder(args).Build();
 
-           var services = scope.ServiceProvider;
+            using var scope = host.Services.CreateScope();
 
-           try{
-               var context = services.GetRequiredService<DataContext>();
-               var userManager = services.GetRequiredService<UserManager<AppUser>>();
-               await context.Database.MigrateAsync();
-               await Seed.SeedData(context,userManager);
-           }catch(Exception ex){
-               var logger = services.GetRequiredService<ILogger<Program>>();
-               logger.LogError(ex,"An error occured during migration");
-           }
+            var services = scope.ServiceProvider;
 
-           await host.RunAsync();
+            try
+            {
+                var context = services.GetRequiredService<DataContext>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                await context.Database.MigrateAsync();
+                await Seed.SeedData(context, userManager);
+            }
+            catch (Exception ex)
+            {
+                var logger = services.GetRequiredService<ILogger<Program>>();
+                logger.LogError(ex, "An error occured during migration");
+            }
+
+            await host.RunAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
