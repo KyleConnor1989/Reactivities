@@ -183,8 +183,6 @@ export default class ProfileStore {
 
             const activities = await agent.Profiles.listActivities(username, predicate!);
 
-            console.log(activities);
-
             runInAction(() => {
                 this.userActivities = activities;
                 this.loadingActivities = false;
