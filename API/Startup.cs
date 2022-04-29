@@ -48,12 +48,12 @@ namespace API
             app.UseXfo(opt => opt.Deny());
             app.UseCsp(opt =>opt
                 .BlockAllMixedContent()
-                .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com","https://cdn.jsdelivr.net"))
+                .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com","https://cdn.jsdelivr.net","sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU="))
                 .FontSources(s => s.Self().CustomSources("https://cdn.jsdelivr.net","https://fonts.gstatic.com", "data:"))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
-                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com"))
-                .ScriptSources(s => s.Self())
+                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com","https://www.facebook.com"))
+                .ScriptSources(s => s.Self().CustomSources("https://connect.facebook.net","sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU=","sha256-GyR+9NAox6fHdK1AV9gjlO7uCHXFEhE/CxNDHpHJUcc="))
             );
 
             if (env.IsDevelopment())
