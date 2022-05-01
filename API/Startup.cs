@@ -48,11 +48,14 @@ namespace API
             app.UseXfo(opt => opt.Deny());
             app.UseCsp(opt =>opt
                 .BlockAllMixedContent()
-                .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com","https://cdn.jsdelivr.net","sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU=","sha256-yChqzBduCCi4o4xdbXRXh4U/t1rP4UUUMJt+rB+ylUI="))
+                .StyleSources(s => s.Self()
+                    .CustomSources("https://fonts.googleapis.com","https://cdn.jsdelivr.net"
+                    ,"sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU=","sha256-yChqzBduCCi4o4xdbXRXh4U/t1rP4UUUMJt+rB+ylUI=",
+                    "sha256-rg9vBVGb4HCmLX9JXBEBSDVopOqpHsM1jQE1yCa1b64="))
                 .FontSources(s => s.Self().CustomSources("https://cdn.jsdelivr.net","https://fonts.gstatic.com", "data:"))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
-                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com","https://www.facebook.com"))
+                .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com","https://www.facebook.com","data:"))
                 .ScriptSources(s => s.Self().CustomSources("https://connect.facebook.net","sha256-r3x6D0yBZdyG8FpooR5ZxcsLuwuJ+pSQ/80YzwXS5IU=","sha256-GyR+9NAox6fHdK1AV9gjlO7uCHXFEhE/CxNDHpHJUcc="))
             );
 
